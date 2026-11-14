@@ -1,0 +1,12 @@
+fastapi>=0.110
+uvicorn>=0.27
+websockets>=12.0
+streamlit>=1.32
+pytest>=8.0
+# Optional FastAPI TestClient dependency:
+# httpx>=0.27
+# Optional local model integrations (install separately when required):
+# opencv-python>=4.9
+# ultralytics>=8.2
+# easyocr>=1.7
+# shap>=0.45

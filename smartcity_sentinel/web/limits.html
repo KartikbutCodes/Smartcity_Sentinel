@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F4EC">
+  <meta name="description" content="A code-grounded ledger of what the SmartCity Sentinel prototype does and does not establish.">
+  <title>Sentinel | What this can't do yet</title>
+  <link rel="stylesheet" href="/site/css/base.css">
+  <link rel="stylesheet" href="/site/css/limits.css">
+  <script src="/site/js/shared.js" defer></script>
+  <script src="/site/js/limits.js" defer></script>
+</head>
+<body class="limits-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="/site/" aria-label="Sentinel home">
+        <span class="brand-mark" aria-hidden="true">SC</span>
+        <span class="brand-copy"><strong>SMARTCITY SENTINEL</strong><small>LIMITS & ASSUMPTIONS</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/site/">Home</a>
+        <a href="/site/dashboard.html">Dashboard</a>
+        <a href="/site/lab.html">Lab</a>
+        <a href="/site/limits.html" aria-current="page">Limits</a>
+        <a href="/site/ml.html">Analytics</a>
+      </nav>
+      <div class="api-state" data-api-state><i class="api-dot" aria-hidden="true"></i><span>CHECKING</span></div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  </header>
+
+  <main id="main" class="page-shell limits-shell">
+    <section class="limits-hero">
+      <div class="reveal">
+        <p class="eyebrow">A CODE-GROUNDED LEDGER</p>
+        <h1>What this can't do (yet).</h1>
+        <p>Every result has a boundary. Here is what the running code actually does, and what would have to change before we could make a bigger claim.</p>
+      </div>
+      <svg class="limits-overview reveal" viewBox="0 0 420 210" role="img" aria-labelledby="limits-title limits-description">
+        <title id="limits-title">A generated signal reaches a measured boundary</title>
+        <desc id="limits-description">A hand-drawn signal passes through sample data and stops at a line marked verify first.</desc>
+        <path class="graphic-stroke overview-route draw-on-scroll" data-draw-path d="M12 110 C48 45 68 170 113 108 S180 52 218 110 S274 156 309 110"/>
+        <path class="graphic-warm" d="M314 46h82v126h-82z"/>
+        <path class="graphic-stroke" d="M330 76h50M330 96h39M330 116h47"/>
+        <path class="graphic-amber" d="M329 136h50v22h-50z"/>
+        <text x="354" y="151" text-anchor="middle" fill="var(--ink)" font-family="var(--mono)" font-size="8">VERIFY FIRST</text>
+        <text x="14" y="194" fill="var(--muted)" font-family="var(--serif)" font-style="italic" font-size="14">the function is real; the evidence is small</text>
+      </svg>
+    </section>
+
+    <div class="ledger-heading" aria-hidden="true">
+      <span></span>
+      <span>CLAIM</span><span>WHAT ACTUALLY HAPPENS</span><span>WHAT IT WOULD TAKE</span>
+    </div>
+    <section class="limits-ledger" aria-label="Claims, implementation details, and next evidence needed">
+      <article class="ledger-row reveal">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-stroke" d="M8 62h114M12 54l23-18 20 9 23-22 20 14 20-25"/><path class="graphic-amber" d="M95 8h20v20H95z"/></svg></figure>
+        <h2>Traffic forecast</h2>
+        <div class="ledger-column" data-label="Claim"><p>A traffic forecast could tell us what comes next.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>The API calls <code>forecast_traffic_baseline</code>, a small trend heuristic. No trainable LSTM implementation is connected in this build.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Collect real traffic history, implement and train a forecast model, then evaluate it against held-out periods and a simple baseline.</p></div>
+      </article>
+      <article class="ledger-row reveal" data-stagger="1">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-warm" d="M16 12h96v58H16z"/><path class="graphic-stroke" d="M27 27h14M49 27h14M71 27h14M93 27h8M27 43h14M49 43h14M71 43h14M93 43h8M27 58h14M49 58h14M71 58h14"/></svg></figure>
+        <h2>Anomaly models</h2>
+        <div class="ledger-column" data-label="Claim"><p>An anomaly score could identify a failing sensor.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>The isolation forest and tiny autoencoder are fitted on the first 30 generated sensor rows. Their scores are not calibrated probabilities.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Gather representative fault and normal histories, validate thresholds with operators, measure false alarms, and recalibrate when conditions change.</p></div>
+      </article>
+      <article class="ledger-row reveal">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-warm" d="M8 61h114V71H8z"/><path class="graphic-fill" d="M18 45h17V61H18zM43 32h17V61H43zM68 39h17V61H68zM93 24h17V61H93z"/><circle cx="27" cy="18" r="4" fill="var(--amber)" stroke="var(--ink)" stroke-width="2"/></svg></figure>
+        <h2>All input data</h2>
+        <div class="ledger-column" data-label="Claim"><p>The page can observe real cameras and infrastructure sensors.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>Readings, alerts, and crowd points are generated by local code. No camera or live sensor is read.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Authorized device integrations, a data-quality plan, clear retention rules, and a way to test each feed without exposing sensitive data.</p></div>
+      </article>
+      <article class="ledger-row reveal" data-stagger="2">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><circle cx="23" cy="24" r="8" fill="var(--amber)" stroke="var(--ink)" stroke-width="2"/><path class="graphic-stroke" d="M23 41v20M17 51h12M50 20h61M50 39h61M50 58h45"/><path class="graphic-teal" d="M12 67h99"/></svg></figure>
+        <h2>Live alert stream</h2>
+        <div class="ledger-column" data-label="Claim"><p>Incoming alerts represent changing city conditions.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>Every five seconds the API picks a generated template, changes its ID and timestamp, and varies severity slightly.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Connect verified event sources, preserve their provenance, and test that duplicate, delayed, or missing messages are handled safely.</p></div>
+      </article>
+      <article class="ledger-row reveal">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-warm" d="M38 35V25a27 27 0 0 1 54 0v10"/><path class="graphic-fill" d="M25 35h80v39H25z"/><circle cx="65" cy="52" r="5" fill="var(--amber)" stroke="var(--ink)" stroke-width="2"/><path class="graphic-stroke" d="M65 57v8"/></svg></figure>
+        <h2>Login and permissions</h2>
+        <div class="ledger-column" data-label="Claim"><p>The role map controls who can use the API.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>There is no login. <code>role_allows</code> checks a static example map, but the API does not call it for authentication.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Add an identity provider, enforce authorization on every route, review session handling, and keep the service behind a deliberate network boundary.</p></div>
+      </article>
+      <article class="ledger-row reveal" data-stagger="1">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-fill" d="M22 18h86v15H22zM22 37h86v15H22zM22 56h86v15H22z"/><path class="graphic-stroke" d="M33 25h23M33 44h45M33 63h34"/></svg></figure>
+        <h2>Saved state</h2>
+        <div class="ledger-column" data-label="Claim"><p>Events and configuration will still be there after a restart.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>The API keeps its working state in memory. Its startup demo files live in a temporary directory, so a restart begins a fresh run.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Choose durable storage, define backup and recovery behavior, and document which generated or operational records should survive.</p></div>
+      </article>
+      <article class="ledger-row reveal">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-stroke" d="M12 41h15M103 41h15"/><path class="graphic-amber" d="M29 22c18 0 18 38 36 38s18-38 36-38"/><path class="graphic-teal" d="M29 34c18 0 18 14 36 14s18-14 36-14"/></svg></figure>
+        <h2>Privacy noise</h2>
+        <div class="ledger-column" data-label="Claim"><p>Every response protects individual records with noise.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>Laplace noise is added to one demonstration count. Other API responses are not automatically privatized.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Set a system-wide privacy design, track repeated queries and sensitivity, and test the complete release path rather than one helper.</p></div>
+      </article>
+      <article class="ledger-row reveal" data-stagger="2">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><rect x="11" y="24" width="31" height="35" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><rect x="50" y="24" width="31" height="35" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><rect x="89" y="24" width="31" height="35" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><path class="graphic-stroke" d="M42 41h8M81 41h8M20 41h13M59 41h13M98 41h13"/></svg></figure>
+        <h2>Audit chain</h2>
+        <div class="ledger-column" data-label="Claim"><p>A hash chain prevents someone from changing the audit history.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p><code>HashChainAuditLog</code> can detect an edit when it verifies the linked records. It cannot stop someone from replacing the whole file and chain.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Protect signing keys and storage separately, restrict write access, export checkpoints, and monitor copies held outside the machine.</p></div>
+      </article>
+      <article class="ledger-row reveal">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-stroke" d="M16 68V14M16 68h100"/><path class="graphic-teal" d="M26 58h15V44H26zM51 58h15V33H51zM76 58h15V49H76z"/><path class="graphic-amber" d="M101 58h15V22h-15z"/></svg></figure>
+        <h2>Fairness sample</h2>
+        <div class="ledger-column" data-label="Claim"><p>The group rates show whether a system is fair.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>The audit counts false-positive and false-negative rates in a small bundled CSV. Groups under 30 rows are explicitly flagged.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Use a representative, consented evaluation set, define relevant harms with affected communities, and compare uncertainty as well as rates.</p></div>
+      </article>
+      <article class="ledger-row reveal" data-stagger="1">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><circle cx="28" cy="40" r="16" fill="var(--sky)" stroke="var(--ink)" stroke-width="2"/><circle cx="102" cy="40" r="16" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/><path class="graphic-stroke" d="M44 40h42M56 31l-12 9 12 9M74 31l12 9-12 9"/><text x="28" y="44" text-anchor="middle" fill="var(--ink)" font-family="var(--mono)" font-size="9">A</text><text x="102" y="44" text-anchor="middle" fill="var(--ink)" font-family="var(--mono)" font-size="9">B</text></svg></figure>
+        <h2>Federated averaging</h2>
+        <div class="ledger-column" data-label="Claim"><p>Devices train a shared model without sharing local data.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>FedAvg calculates a sample-count-weighted mean of the supplied numbers. It does not train a model or communicate with a device.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Implement local training, secure update exchange, aggregation rounds, and checks for poisoned or incompatible updates.</p></div>
+      </article>
+      <article class="ledger-row reveal">
+        <figure aria-hidden="true"><svg viewBox="0 0 130 82"><path class="graphic-warm" d="M12 14h106v54H12z"/><path class="graphic-stroke" d="M25 55l20-22 18 12 18-21 25 28"/><circle cx="45" cy="33" r="4" fill="var(--teal)" stroke="var(--ink)" stroke-width="2"/><circle cx="81" cy="24" r="4" fill="var(--amber)" stroke="var(--ink)" stroke-width="2"/></svg></figure>
+        <h2>Optional vision and explanation code</h2>
+        <div class="ledger-column" data-label="Claim"><p>YOLO, OCR, SHAP, and Grad-CAM all run in the demo.</p></div>
+        <div class="ledger-column" data-label="What actually happens"><p>Optional YOLO, EasyOCR, and SHAP adapters exist but are not wired into the demo. No Grad-CAM implementation was found in this build.</p></div>
+        <div class="ledger-column" data-label="What it would take"><p>Install optional packages and local model files deliberately, connect tested inputs, and review each output before it affects an operation.</p></div>
+      </article>
+    </section>
+
+    <section class="next-band reveal">
+      <div>
+        <p class="eyebrow">WHERE WE WOULD GO NEXT</p>
+        <h2>Four pieces of evidence before a bigger claim.</h2>
+      </div>
+      <ol>
+        <li><strong>Measure first.</strong> Connect authorized sensor history and check its quality over time.</li>
+        <li><strong>Validate forecasts.</strong> Train against real history and compare results with a baseline on held-out periods.</li>
+        <li><strong>Protect access.</strong> Add authentication, route-level authorization, and a deliberate deployment boundary.</li>
+        <li><strong>Test harms.</strong> Evaluate privacy, model errors, and group differences with representative data and a clear review process.</li>
+      </ol>
+    </section>
+    <p class="limits-link"><a class="inline-link" href="/site/lab.html">Go back to the Lab experiments</a></p>
+  </main>
+  <footer class="site-footer">Everything here runs on generated data on this machine.</footer>
+</body>
+</html>

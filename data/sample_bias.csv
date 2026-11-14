@@ -1,0 +1,9 @@
+group,actual,predicted
+group_a,1,1
+group_a,1,0
+group_a,0,1
+group_a,0,0
+group_b,1,1
+group_b,1,1
+group_b,0,1
+group_b,0,0

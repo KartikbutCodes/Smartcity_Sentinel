@@ -1,0 +1,14 @@
+# Reference only; application code currently does not load this file.
+demo:
+  random_seed: 17
+privacy:
+  retention_days: 7
+  differential_privacy_epsilon: 1.0
+video:
+  loitering_seconds: 30
+  restricted_zone: [[0.70, 0.10], [0.98, 0.10], [0.98, 0.90], [0.70, 0.90]]
+alerts:
+  high_risk_threshold: 0.75
+environment:
+  air_quality_index_threshold: 150
+  flood_level_meters_threshold: 0.60

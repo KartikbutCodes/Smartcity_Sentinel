@@ -1,0 +1,50 @@
+[
+  {
+    "id": "incident-1",
+    "timestamp": "2026-11-14T04:58:03.904233+00:00",
+    "kind": "crowd_density",
+    "severity": 0.83,
+    "location": "Central Junction",
+    "description": "Simulated crowd density signal",
+    "metadata": {
+      "source": "edge-4",
+      "identity_data": false
+    }
+  },
+  {
+    "id": "incident-2",
+    "timestamp": "2026-11-14T04:58:03.904250+00:00",
+    "kind": "environmental_threshold",
+    "severity": 0.91,
+    "location": "River Ward",
+    "description": "Simulated environmental threshold signal",
+    "metadata": {
+      "source": "edge-3",
+      "identity_data": false
+    }
+  },
+  {
+    "id": "incident-3",
+    "timestamp": "2026-11-14T04:58:03.904257+00:00",
+    "kind": "restricted_zone",
+    "severity": 0.54,
+    "location": "North Bridge",
+    "description": "Simulated restricted zone signal",
+    "metadata": {
+      "source": "edge-3",
+      "identity_data": false
+    }
+  },
+  {
+    "id": "incident-4",
+    "timestamp": "2026-11-14T04:58:03.904261+00:00",
+    "kind": "infrastructure_anomaly",
+    "severity": 0.72,
+    "location": "Market Square",
+    "description": "Simulated infrastructure anomaly signal",
+    "metadata": {
+      "source": "edge-3",
+      "identity_data": false
+    }
+  }
+]

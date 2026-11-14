@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F4EC">
+  <title>Sentinel | Analytics endpoints</title>
+  <link rel="stylesheet" href="/site/css/base.css">
+  <link rel="stylesheet" href="/site/css/dashboard.css">
+  <script src="/site/js/shared.js" defer></script>
+  <script src="/site/js/ml-page.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="/site/" aria-label="Sentinel home">
+        <span class="brand-mark" aria-hidden="true">SC</span>
+        <span class="brand-copy"><strong>SMARTCITY SENTINEL</strong><small>ANALYTICS ENDPOINTS</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/site/">Home</a>
+        <a href="/site/dashboard.html">Dashboard</a>
+        <a href="/site/lab.html">Lab</a>
+        <a href="/site/limits.html">Limits</a>
+        <a href="/site/ml.html" aria-current="page">Analytics</a>
+      </nav>
+      <div class="api-state" data-api-state><i class="api-dot" aria-hidden="true"></i><span>CHECKING</span></div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  </header>
+  <main id="main" class="page-shell">
+    <section class="limits-hero">
+      <div>
+        <p class="eyebrow">BASELINE API ROUTES</p>
+        <h1>Analytics endpoints</h1>
+        <p>The API returns dependency-free heuristic examples using synthetic data. These routes do not load trained model artifacts.</p>
+      </div>
+    </section>
+    <div class="ml-wrap">
+      <section class="panel ml-panel" aria-labelledby="traffic-title">
+        <h2 id="traffic-title">Traffic analytics</h2>
+        <p class="help-note">Recent-trend baseline response; not a trained forecast.</p>
+        <pre class="ml-result" id="traffic" aria-live="polite">Loading local response…</pre>
+      </section>
+      <section class="panel ml-panel" aria-labelledby="anomaly-title">
+        <h2 id="anomaly-title">Anomaly analytics</h2>
+        <p class="help-note">Illustrative anomaly-baseline scores, not calibrated probabilities.</p>
+        <pre class="ml-result" id="anomaly" aria-live="polite">Loading local response…</pre>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer">Everything here runs on generated data on this machine.</footer>
+</body>
+</html>
