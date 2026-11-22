@@ -159,6 +159,34 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(comparison.json()["edge_uplink_bytes"], 500)
         self.assertEqual(self.client.post("/tools/edge-cloud", json={"source_bytes": 0}).status_code, 422)
 
+    def test_example_endpoints_are_seeded_and_repeatable(self) -> None:
+        sensors = self.client.get("/examples/sensors", params={"seed": 17})
+        self.assertEqual(sensors.status_code, 200)
+        sensor_json = sensors.json()
+        self.assertEqual(len(sensor_json["rows"]), 48)
+        self.assertEqual(len(sensor_json["highest_indexes"]), 3)
+        self.assertEqual(sensor_json, self.client.get("/examples/sensors", params={"seed": 17}).json())
+
+        traffic = self.client.get("/examples/traffic-camera", params={"seed": 17})
+        self.assertEqual(traffic.status_code, 200)
+        traffic_json = traffic.json()
+        self.assertEqual(len(traffic_json["frames"]), 150)
+        self.assertIn("crossings", traffic_json)
+        self.assertIn("speeds", traffic_json)
+        self.assertIn("edge_cloud", traffic_json)
+        self.assertEqual(traffic_json, self.client.get("/examples/traffic-camera", params={"seed": 17}).json())
+
+        plates = self.client.get("/examples/plate-camera", params={"seed": 17})
+        self.assertEqual(plates.status_code, 200)
+        plate_json = plates.json()
+        self.assertEqual(len(plate_json["reads"]), 12)
+        self.assertTrue(any(read["valid"] for read in plate_json["reads"]))
+        self.assertTrue(any(not read["valid"] for read in plate_json["reads"]))
+        self.assertEqual(plate_json, self.client.get("/examples/plate-camera", params={"seed": 17}).json())
+
+        self.assertEqual(self.client.get("/examples/sensors", params={"seed": -1}).status_code, 422)
+        self.assertEqual(self.client.get("/examples/traffic-camera", params={"seed": 2147483648}).status_code, 422)
+
     def test_q_learning_and_video_event_tools(self) -> None:
         q_result = self.client.post("/tools/q-learning", json={"episodes": 2})
         self.assertEqual(q_result.status_code, 200)

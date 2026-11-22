@@ -36,19 +36,18 @@ class BaselineApiTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.context.__exit__(None, None, None)
-    def test_analytics_page_is_served_and_names_baselines(self):
-        response = self.client.get("/site/ml.html")
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("dependency-free heuristic examples", response.text)
-        script = self.client.get("/site/js/ml-page.js")
-        self.assertEqual(script.status_code, 200)
-        self.assertIn("/ml/traffic", script.text)
+    def test_analytics_page_is_removed(self):
+        self.assertEqual(self.client.get("/site/ml.html").status_code, 404)
+        self.assertEqual(self.client.get("/site/js/ml-page.js").status_code, 404)
+        self.assertEqual(self.client.get("/site/limits.html").status_code, 404)
 
-    def test_analytics_page_is_reachable_from_site_navigation(self):
-        for page in ("/site/", "/site/dashboard.html", "/site/lab.html", "/site/limits.html", "/site/ml.html"):
+    def test_examples_is_reachable_and_analytics_is_unlinked(self):
+        for page in ("/site/", "/site/dashboard.html", "/site/lab.html", "/site/examples.html"):
             response = self.client.get(page)
             self.assertEqual(response.status_code, 200, page)
-            self.assertIn('href="/site/ml.html"', response.text, page)
+            self.assertIn('href="/site/examples.html"', response.text, page)
+            self.assertNotIn("Analytics", response.text, page)
+            self.assertNotIn("limits.html", response.text, page)
 
     def test_status_and_traffic_are_baselines(self):
         status = self.client.get("/ml/status").json()
