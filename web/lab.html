@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F4EC">
+  <meta name="description" content="Run small, local SmartCity Sentinel experiments on generated data.">
+  <title>Sentinel | Lab experiments</title>
+  <link rel="stylesheet" href="/site/css/base.css">
+  <link rel="stylesheet" href="/site/css/lab.css">
+  <link rel="stylesheet" href="css/brand.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="/site/js/shared.js" defer></script>
+  <script src="/site/js/lab.js" defer></script>
+</head>
+<body class="lab-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="index.html" aria-label="Smartcity Sentinel home">
+        <svg class="brand-mark" viewBox="-26 -26 52 52" width="34" height="34" aria-hidden="true">
+          <path d="M14 -14 C-6 -20 -18 -6 0 0 C18 6 6 20 -14 14" fill="none" stroke="var(--brand-ink)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="14" cy="-14" r="4.5" fill="var(--brand-amber)"/>
+          <circle cx="-14" cy="14" r="4.5" fill="var(--brand-teal)"/>
+        </svg>
+        <span class="brand-name"><span class="brand-a">smartcity</span><span class="brand-b">sentinel</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/site/">Home</a>
+        <a href="/site/dashboard.html">Dashboard</a>
+        <a href="/site/lab.html" aria-current="page">Lab</a>
+        <a href="/site/examples.html">Examples</a>
+      </nav>
+      <div class="api-state" data-api-state><i class="api-dot" aria-hidden="true"></i><span>CHECKING</span></div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  </header>
+
+  <main id="main" class="page-shell lab-page-shell">
+    <section class="lab-intro">
+      <div>
+        <p class="eyebrow">THE LAB / 17 SMALL QUESTIONS</p>
+        <h1>Try the city tools, one question at a time.</h1>
+        <p>Each experiment runs a real function from this system on generated data. DEMO and BASELINE badges mean the method is simplified.</p>
+      </div>
+      <button class="button secondary glossary-open" type="button" aria-haspopup="dialog" aria-controls="glossary-dialog">Open the glossary</button>
+    </section>
+
+    <div class="lab-layout">
+      <aside class="experiment-rail">
+        <nav id="experiment-nav" aria-label="Jump to an experiment"></nav>
+      </aside>
+      <div id="experiments" class="experiment-list" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <dialog class="glossary-drawer" id="glossary-dialog" aria-labelledby="glossary-title">
+    <div class="glossary-head">
+      <div><p class="eyebrow">PLAIN LANGUAGE</p><h2 id="glossary-title">A small glossary</h2></div>
+      <button class="panel-help glossary-close" type="button" aria-label="Close glossary">×</button>
+    </div>
+    <div id="glossary-terms" class="glossary-terms"></div>
+  </dialog>
+
+  <footer class="site-footer">Everything here runs on generated data on this machine.</footer>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F4EC">
+  <title>Sentinel | Operations dashboard</title>
+  <link rel="stylesheet" href="/site/css/base.css">
+  <link rel="stylesheet" href="/site/css/dashboard.css?v=20261114-chartfix2">
+  <link rel="stylesheet" href="css/brand.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="/site/js/shared.js" defer></script>
+  <script src="/site/js/dashboard.js?v=20261114-chartfix2" defer></script>
+</head>
+<body class="dashboard-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="index.html" aria-label="Smartcity Sentinel home">
+        <svg class="brand-mark" viewBox="-26 -26 52 52" width="34" height="34" aria-hidden="true">
+          <path d="M14 -14 C-6 -20 -18 -6 0 0 C18 6 6 20 -14 14" fill="none" stroke="var(--brand-ink)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="14" cy="-14" r="4.5" fill="var(--brand-amber)"/>
+          <circle cx="-14" cy="14" r="4.5" fill="var(--brand-teal)"/>
+        </svg>
+        <span class="brand-name"><span class="brand-a">smartcity</span><span class="brand-b">sentinel</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/site/">Home</a>
+        <a href="/site/dashboard.html" aria-current="page">Dashboard</a>
+        <a href="/site/lab.html">Lab</a>
+        <a href="/site/examples.html">Examples</a>
+      </nav>
+      <div class="api-state" data-api-state><i class="api-dot" aria-hidden="true"></i><span>CHECKING</span></div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  </header>
+  <p class="city-narrator narrator-under-nav" id="city-narrator" aria-live="polite">Checking the latest local signals…</p>
+
+  <main id="main" class="page-shell dashboard-shell">
+    <div class="dashboard-grid">
+      <section class="panel map-panel reveal" aria-labelledby="map-title" data-help-panel>
+        <header class="panel-head">
+          <div class="panel-title-wrap"><span class="panel-index">01</span><h1 id="map-title">CITY NETWORK</h1></div>
+          <span class="route-summary" id="route-summary">Waiting for /route</span>
+          <button class="panel-help" type="button" aria-expanded="false" aria-controls="help-map">?</button>
+        </header>
+        <p class="help-note" id="help-map" hidden>The roads and distances come from the local city graph. Alert nodes take the color of their latest known severity; HIGH, MED, and LOW are named in the alert log.</p>
+        <div class="map-wrap" id="map-wrap">
+          <svg id="city-map" viewBox="0 0 640 360" role="img" aria-labelledby="map-svg-title map-svg-desc">
+            <title id="map-svg-title">City response network</title>
+            <desc id="map-svg-desc">Street nodes, response route, and alert locations returned by the local API.</desc>
+            <g id="city-edges"></g><g id="city-route"></g><g id="city-markers"></g><g id="city-nodes"></g>
+          </svg>
+          <div class="map-key">
+            <span><i class="key-route"></i>Response route</span>
+            <span><i class="key-alert"></i>Alert location (severity labeled in feed)</span>
+          </div>
+        </div>
+        <p class="panel-state" id="map-state" aria-live="polite">Loading city network…</p>
+      </section>
+
+      <section class="panel feed-panel reveal" data-stagger="1" aria-labelledby="feed-title" data-help-panel>
+        <header class="panel-head">
+          <div class="panel-title-wrap"><span class="panel-index">02</span><h2 id="feed-title">LIVE ALERT LOG</h2></div>
+          <span class="panel-meta" id="feed-state">LOADING</span>
+          <button class="panel-help" type="button" aria-expanded="false" aria-controls="help-feed">?</button>
+        </header>
+        <p class="help-note" id="help-feed" hidden>Alerts are generated locally and streamed from the API. Select any row to inspect its complete JSON record.</p>
+        <div class="metric-strip"><span>ALERTS RECEIVED</span><strong id="alert-count" data-api-number>—</strong><span id="stream-state" class="tag"><span>CONNECTING</span></span></div>
+        <div class="feed-columns" aria-hidden="true"><span>TIME / LEVEL</span><span>EVENT / LOCATION</span></div>
+        <div class="alert-feed" id="alert-feed" aria-live="polite" aria-relevant="additions text"><p class="panel-state">Waiting for alert data…</p></div>
+      </section>
+
+      <section class="panel sensor-panel reveal" aria-labelledby="sensor-title" data-help-panel>
+        <header class="panel-head">
+          <div class="panel-title-wrap"><span class="panel-index">03</span><h2 id="sensor-title">SENSOR TELEMETRY</h2></div>
+          <span class="panel-meta">LOCAL HISTORY</span>
+          <button class="panel-help" type="button" aria-expanded="false" aria-controls="help-sensors">?</button>
+        </header>
+        <p class="help-note" id="help-sensors" hidden>Each sparkline uses the sensor_readings returned by /metrics. Amber dots mark values more than two standard deviations from that series' mean. The flood line is the configured 0.6 m threshold.</p>
+        <div class="sensor-history" id="sensor-history">Waiting for readings…</div>
+        <div class="sensor-grid" id="sensor-grid"><p class="panel-state">Waiting for /metrics sensor_readings…</p></div>
+      </section>
+
+      <section class="panel crowd-panel reveal" data-stagger="2" aria-labelledby="crowd-title" data-help-panel>
+        <header class="panel-head">
+          <div class="panel-title-wrap"><span class="panel-index">04</span><h2 id="crowd-title">CROWD RISK</h2></div>
+          <button class="panel-help" type="button" aria-expanded="false" aria-controls="help-crowd">?</button>
+        </header>
+        <p class="help-note" id="help-crowd" hidden>The score and the normalized source grid come from /metrics. This is a simplified occupancy score, not a safety assessment.</p>
+        <div class="gauge-layout">
+          <svg id="crowd-gauge" viewBox="0 0 120 120" role="img" aria-labelledby="crowd-gauge-title crowd-gauge-desc">
+            <title id="crowd-gauge-title">Crowd risk score</title>
+            <desc id="crowd-gauge-desc">Risk score returned by the API, ranging from zero to one.</desc>
+            <circle class="gauge-track" cx="60" cy="60" r="45"></circle>
+            <circle class="gauge-value" id="gauge-value" cx="60" cy="60" r="45"></circle>
+            <text id="gauge-label" x="60" y="58">—</text><text class="gauge-unit" x="60" y="76">/ 1.0</text>
+          </svg>
+          <div><p id="crowd-explanation">Crowd estimate from the generated density grid.</p><span class="crowd-source" id="crowd-state">SOURCE VALUE —</span></div>
+        </div>
+      </section>
+
+      <section class="panel edge-panel reveal" aria-labelledby="edge-title" data-help-panel>
+        <header class="panel-head">
+          <div class="panel-title-wrap"><span class="panel-index">05</span><h2 id="edge-title">EDGE / CLOUD</h2></div>
+          <button class="panel-help" type="button" aria-expanded="false" aria-controls="help-edge">?</button>
+        </header>
+        <p class="help-note" id="help-edge" hidden>The byte counts, latency estimates, and reduction ratio are returned by /metrics. Bar lengths use a log scale; the input values stay visible beside each bar.</p>
+        <p id="edge-ratio" class="edge-ratio">Waiting for API values…</p>
+        <div id="edge-bars" class="edge-bars"><p class="panel-state">Waiting for comparison…</p></div>
+      </section>
+
+      <section class="panel anomaly-panel reveal" data-stagger="1" aria-labelledby="anomaly-title" data-help-panel>
+        <header class="panel-head">
+          <div class="panel-title-wrap"><span class="panel-index">06</span><h2 id="anomaly-title">ANOMALY</h2></div>
+          <button class="panel-help" type="button" aria-expanded="false" aria-controls="help-anomaly">?</button>
+        </header>
+        <p class="help-note" id="help-anomaly" hidden>Both numbers are returned by /metrics for the latest synthetic sensor vector. Higher values indicate a less typical sample for the generated reference set; neither value is a probability.</p>
+        <div id="anomaly-readouts" class="readout-list"><p class="panel-state">Waiting for anomaly scores…</p></div>
+      </section>
+
+      <section class="panel audit-panel reveal" data-stagger="2" aria-labelledby="audit-title" data-help-panel>
+        <header class="panel-head">
+          <div class="panel-title-wrap"><span class="panel-index">07</span><h2 id="audit-title">AUDIT CHAIN</h2></div>
+          <span class="audit-state" id="audit-state">CHECKING</span>
+          <button class="panel-help" type="button" aria-expanded="false" aria-controls="help-audit">?</button>
+        </header>
+        <p class="help-note" id="help-audit" hidden>The API creates this five-block check in a temporary directory, then deliberately edits one record. The demo hashes never touch data/audit.jsonl.</p>
+        <svg id="audit-chain" viewBox="0 0 520 80" role="img" aria-label="Five linked demo blocks generated by the API"></svg>
+        <p class="audit-detail" id="audit-detail">Checking the temporary API chain…</p>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="alert-detail" class="detail-dialog" aria-labelledby="detail-title">
+    <form method="dialog">
+      <header class="panel-head"><h2 id="detail-title">ALERT RECORD</h2><button class="close-button" aria-label="Close alert details">Close</button></header>
+    </form>
+    <pre id="alert-json"></pre>
+  </dialog>
+  <footer class="site-footer">Everything here runs on generated data on this machine.</footer>
+</body>
+</html>

@@ -1,0 +1,10 @@
+:root { --brand-ink:#1D2733; --brand-teal:#1F7A6D; --brand-amber:#D9822B; }
+.brand { display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--brand-ink); }
+.brand:focus-visible { outline:2px solid var(--brand-teal); outline-offset:4px; border-radius:6px; }
+.brand-mark { width:34px; height:34px; border:0; border-radius:0; }
+.brand-name { font-family:Bahnschrift,"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif; font-size:21px; line-height:1; letter-spacing:-0.01em; text-transform:none; white-space:nowrap; }
+.brand-a { font-weight:300; opacity:.8; }
+.brand-b { font-weight:700; margin-left:.3em; }
+@media (max-width:480px) { .brand-a { display:none; } .brand-b { margin-left:0; } }
+.brand--small .brand-mark { width:20px; height:20px; }
+.brand--small .brand-name { font-size:15px; }

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F4EC">
+  <meta name="description" content="A local city-operations prototype running on generated data.">
+  <title>Sentinel | City operations, locally</title>
+  <link rel="stylesheet" href="/site/css/base.css">
+  <link rel="stylesheet" href="/site/css/home.css">
+  <link rel="stylesheet" href="css/brand.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="/site/js/shared.js" defer></script>
+  <script src="/site/js/home.js?v=20261121-graphics2" defer></script>
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="index.html" aria-label="Smartcity Sentinel home">
+        <svg class="brand-mark" viewBox="-26 -26 52 52" width="34" height="34" aria-hidden="true">
+          <path d="M14 -14 C-6 -20 -18 -6 0 0 C18 6 6 20 -14 14" fill="none" stroke="var(--brand-ink)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="14" cy="-14" r="4.5" fill="var(--brand-amber)"/>
+          <circle cx="-14" cy="14" r="4.5" fill="var(--brand-teal)"/>
+        </svg>
+        <span class="brand-name"><span class="brand-a">smartcity</span><span class="brand-b">sentinel</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/site/" aria-current="page">Home</a>
+        <a href="/site/dashboard.html">Dashboard</a>
+        <a href="/site/lab.html">Lab</a>
+        <a href="/site/examples.html">Examples</a>
+      </nav>
+      <div class="api-state" data-api-state><i class="api-dot" aria-hidden="true"></i><span>CHECKING</span></div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  </header>
+
+  <main id="main">
+    <p class="city-narrator" id="home-narrator" aria-live="polite">Checking the latest local signals…</p>
+    <div class="page-shell">
+      <section class="home-hero">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">A LOCAL OPERATIONS PROTOTYPE / GENERATED SIGNALS</p>
+          <h1>A small city, watched carefully, with its <span class="hand-underline">privacy intact.</span></h1>
+          <p class="lede">We run the whole loop on this machine: a signal arrives, gets checked, and reaches the operations view without sending a frame outside it.</p>
+          <div class="hero-actions">
+            <a class="button" href="/site/dashboard.html">Open the dashboard <span aria-hidden="true">→</span></a>
+            <a class="button secondary" href="/site/lab.html">Try a tool</a>
+          </div>
+        </div>
+        <div class="hero-art-wrap reveal" data-stagger="1">
+          <svg class="hero-art parallax-layer" id="home-city" viewBox="0 0 800 440" role="img" aria-labelledby="home-map-title home-map-description">
+            <title id="home-map-title">A small generated city map</title>
+            <desc id="home-map-description">Four named city nodes, a response route from the local API, and severity-colored alert pulses.</desc>
+            <path class="hero-road" d="M75 220H735M215 75V365M410 75V365M610 75V365"/>
+            <path class="hero-road-edge" d="M75 220H735M215 75V365M410 75V365M610 75V365"/>
+            <path class="hero-street" d="M75 120H735M75 320H735M120 75V365M315 75V365M510 75V365M700 75V365"/>
+            <g aria-hidden="true">
+              <path class="hero-building" d="M54 92h93v86H54zM64 78h73v14H64z"/>
+              <path class="hero-building" d="M264 91h88v87h-88zM279 68h58v23h-58z"/>
+              <path class="hero-building" d="M465 91h92v87h-92zM480 69h61v22h-61z"/>
+              <path class="hero-building" d="M655 92h91v86h-91zM671 72h56v20h-56z"/>
+              <path class="hero-building" d="M67 264h112v76H67zM91 245h66v19H91z"/>
+              <path class="hero-building" d="M270 263h105v77H270zM288 242h68v21h-68z"/>
+              <path class="hero-building" d="M466 263h111v77H466zM486 242h72v21h-72z"/>
+              <path class="hero-building" d="M654 262h101v78H654zM674 241h62v21h-62z"/>
+              <path class="hero-window" d="M72 105h15v16H72zM101 105h15v16h-15zM72 139h15v16H72zM101 139h15v16h-15z"/>
+              <path class="hero-window" d="M280 105h15v16h-15zM310 105h15v16h-15zM280 139h15v16h-15zM310 139h15v16h-15z"/>
+              <path class="hero-window" d="M484 105h15v16h-15zM514 105h15v16h-15zM484 139h15v16h-15zM514 139h15v16h-15z"/>
+              <path class="hero-window" d="M675 105h15v16h-15zM706 105h15v16h-15zM675 139h15v16h-15zM706 139h15v16h-15z"/>
+            </g>
+            <g id="home-route-layer" aria-hidden="true"></g>
+            <g class="hero-moving-vehicles" aria-hidden="true">
+              <circle class="hero-vehicle" cx="75" cy="220" r="8"><title>Generated vehicle marker</title></circle>
+              <circle class="hero-vehicle alt" cx="75" cy="220" r="7"><title>Generated vehicle marker</title></circle>
+            </g>
+            <g class="home-city-node" data-city-node="Central" data-location="Central Junction" transform="translate(215 220)">
+              <circle class="hero-node-pulse" r="16"/><circle class="hero-node" r="8"/>
+              <text class="hero-svg-label" x="0" y="34" text-anchor="middle">CENTRAL</text>
+              <text class="hero-severity-label" x="0" y="49" text-anchor="middle">NO ALERT</text>
+            </g>
+            <g class="home-city-node" data-city-node="North" data-location="North Bridge" transform="translate(410 120)">
+              <circle class="hero-node-pulse" r="16"/><circle class="hero-node" r="8"/>
+              <text class="hero-svg-label" x="0" y="-20" text-anchor="middle">NORTH</text>
+              <text class="hero-severity-label" x="0" y="-35" text-anchor="middle">NO ALERT</text>
+            </g>
+            <g class="home-city-node" data-city-node="River" data-location="River Ward" transform="translate(410 320)">
+              <circle class="hero-node-pulse" r="16"/><circle class="hero-node" r="8"/>
+              <text class="hero-svg-label" x="0" y="34" text-anchor="middle">RIVER</text>
+              <text class="hero-severity-label" x="0" y="49" text-anchor="middle">NO ALERT</text>
+            </g>
+            <g class="home-city-node" data-city-node="Market" data-location="Market Square" transform="translate(610 220)">
+              <circle class="hero-node-pulse" r="16"/><circle class="hero-node" r="8"/>
+              <text class="hero-svg-label" x="0" y="34" text-anchor="middle">MARKET</text>
+              <text class="hero-severity-label" x="0" y="49" text-anchor="middle">NO ALERT</text>
+            </g>
+            <text class="hero-svg-note" x="44" y="406">streets are a drawing; signals come from the API</text>
+          </svg>
+          <div class="hero-sticker"><p class="margin-note">this is where the generated data starts</p></div>
+        </div>
+      </section>
+
+      <section class="home-live reveal" aria-label="Live API values">
+        <div class="home-live-cell"><span class="eyebrow">Crowd risk / 0–1</span><strong id="home-crowd" data-api-number>—</strong></div>
+        <div class="home-live-cell"><span class="eyebrow">Alerts received</span><strong id="home-alerts" data-api-number>—</strong></div>
+        <div class="home-live-cell"><span class="eyebrow">Audit check</span><strong id="home-audit">CHECKING</strong></div>
+        <div class="home-live-cell"><span class="eyebrow">Response route</span><strong id="home-route-distance" data-api-number>—</strong></div>
+      </section>
+
+      <section class="story-section" aria-labelledby="story-title">
+        <header class="section-intro reveal">
+          <div><p class="eyebrow">FROM SENSOR TO SCREEN</p><h2 id="story-title">The life of one signal</h2></div>
+          <p>A generated reading moves through a few small functions. Scroll the notes; the drawing follows along.</p>
+        </header>
+        <div class="story-layout">
+          <div class="story-steps" id="story-steps">
+            <article class="story-step reveal is-active" data-stage="sensor">
+              <p class="eyebrow">01 / SENSOR</p><h3>A reading appears</h3>
+              <p>Power, pressure, vibration and other values come from the local synthetic stream.</p>
+              <p class="margin-note">No sensor is attached to this page.</p>
+            </article>
+            <article class="story-step reveal" data-stage="edge">
+              <p class="eyebrow">02 / EDGE</p><h3>Only a small record moves on</h3>
+              <p>The edge example keeps labels and counts. It does not accept or forward image frames.</p>
+              <p class="margin-note">The envelope is metadata, not a picture.</p>
+            </article>
+            <article class="story-step reveal" data-stage="queue">
+              <p class="eyebrow">03 / QUEUE</p><h3>The demo queue holds a snapshot</h3>
+              <p id="queue-story-text">Loading the queue count from the API…</p>
+            </article>
+            <article class="story-step reveal" data-stage="checks">
+              <p class="eyebrow">04 / CHECKS</p><h3>Rules put a number on it</h3>
+              <p id="priority-story-text">Loading the priority result…</p>
+              <p class="margin-note">A score is a hint, not a dispatch decision.</p>
+            </article>
+            <article class="story-step reveal" data-stage="privacy">
+              <p class="eyebrow">05 / PRIVACY</p><h3>Keep what the operation needs</h3>
+              <p>The minimizer applies an allowlist and removes selected identity fields from metadata.</p>
+            </article>
+            <article class="story-step reveal" data-stage="api">
+              <p class="eyebrow">06 / API</p><h3>Loopback serves the response</h3>
+              <p>FastAPI returns the generated state to this browser on the same machine.</p>
+            </article>
+            <article class="story-step reveal" data-stage="you">
+              <p class="eyebrow">07 / YOU</p><h3>Open the record, then inspect it</h3>
+              <p>The dashboard lets you read the full alert record and follow the route.</p>
+              <a class="inline-link" href="/site/dashboard.html">Go to the control room →</a>
+            </article>
+          </div>
+          <aside class="story-pin" aria-label="Signal journey diagram and API sample">
+            <svg class="story-graphic" viewBox="0 0 620 260" role="img" aria-labelledby="story-svg-title story-svg-desc">
+              <title id="story-svg-title">Signal path through local operations</title>
+              <desc id="story-svg-desc">The active stage changes as the signal moves from sensor to browser.</desc>
+              <path class="journey-arrow" d="M574 130l-16-9v18z"/>
+              <g class="story-scene is-active" data-scene="sensor" transform="translate(18 45)">
+                <rect class="graphic-fill" x="0" y="36" width="58" height="58" rx="7"/>
+                <path class="graphic-stroke" d="M12 70h8l7-15 9 30 7-15h7"/>
+                <text class="hero-svg-label" x="29" y="117" text-anchor="middle">SENSOR</text>
+              </g>
+              <g class="story-scene" data-scene="edge" transform="translate(105 45)">
+                <rect class="graphic-warm" x="0" y="36" width="58" height="58" rx="7"/>
+                <path class="graphic-stroke" d="M11 51h36M11 64h24M11 77h30"/>
+                <text class="hero-svg-label" x="29" y="117" text-anchor="middle">EDGE</text>
+              </g>
+              <g class="story-scene" data-scene="queue" transform="translate(192 45)">
+                <rect class="graphic-fill" x="0" y="36" width="58" height="58" rx="7"/>
+                <path class="graphic-stroke" d="M12 52h34M12 65h28M12 78h22"/>
+                <text class="hero-svg-label" x="29" y="117" text-anchor="middle">QUEUE</text>
+              </g>
+              <g class="story-scene" data-scene="checks" transform="translate(279 45)">
+                <path class="graphic-warm" d="M29 32 58 42v25c0 20-14 32-29 39C14 99 0 87 0 67V42z"/>
+                <path class="graphic-stroke" d="m17 68 8 9 18-21"/>
+                <text class="hero-svg-label" x="29" y="117" text-anchor="middle">CHECKS</text>
+              </g>
+              <g class="story-scene" data-scene="privacy" transform="translate(366 45)">
+                <rect class="graphic-teal" x="0" y="43" width="58" height="43" rx="6"/>
+                <path class="graphic-stroke" d="M6 50l23 17 23-17M20 43v-7a9 9 0 0 1 18 0v7"/>
+                <text class="hero-svg-label" x="29" y="117" text-anchor="middle">PRIVACY</text>
+              </g>
+              <g class="story-scene" data-scene="api" transform="translate(453 45)">
+                <rect class="graphic-fill" x="0" y="36" width="58" height="58" rx="6"/>
+                <path class="graphic-stroke" d="M10 52h38M10 65h30M10 78h34"/>
+                <text class="hero-svg-label" x="29" y="117" text-anchor="middle">API</text>
+              </g>
+              <g class="story-scene" data-scene="you" transform="translate(540 45)">
+                <rect class="graphic-warm" x="0" y="36" width="58" height="58" rx="6"/>
+                <path class="graphic-stroke" d="M10 52h38M10 65h24M10 78h31"/>
+                <text class="hero-svg-label" x="29" y="117" text-anchor="middle">YOU</text>
+              </g>
+              <circle class="graphic-amber" id="story-signal-dot" cx="47" cy="130" r="7"/>
+            </svg>
+            <div>
+              <p class="eyebrow" id="story-stage-label">01 / SENSOR</p>
+              <p class="serif-caption" id="story-stage-caption">A generated reading enters the local path.</p>
+              <pre class="story-snippet" id="signal-snippet">Waiting for the local API…</pre>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="capabilities" aria-labelledby="capabilities-title">
+        <header class="section-intro reveal">
+          <div><p class="eyebrow">SMALL TOOLS, REAL FUNCTIONS</p><h2 id="capabilities-title">What it can do</h2></div>
+          <p>Each panel below is wired to the same functions you can run in the Lab.</p>
+        </header>
+        <div class="capability-grid">
+          <article class="capability-card reveal" data-stagger="1">
+            <svg class="capability-graphic" id="cap-route-map" viewBox="0 0 300 128" role="img" aria-label="Route returned by the local API"></svg>
+            <h3>Route a response</h3><p>Choose two nodes in the built-in weighted city graph.</p>
+            <span class="capability-value" id="cap-route-value">Waiting for /route…</span>
+            <a class="capability-link" href="/site/lab.html?tool=route">Open the route tool →</a>
+          </article>
+          <article class="capability-card reveal" data-stagger="2">
+            <svg class="capability-graphic" id="cap-crowd-grid" viewBox="0 0 8 8" role="img" aria-label="Generated crowd density grid"></svg>
+            <h3>Read a crowd grid</h3><p>The local grid bins generated points and reports a capped occupancy score.</p>
+            <span class="capability-value" id="cap-crowd-value">Waiting for /tools/crowd…</span>
+            <a class="capability-link" href="/site/lab.html?tool=crowd">Open the crowd tool →</a>
+          </article>
+          <article class="capability-card reveal" data-stagger="3">
+            <svg class="capability-graphic" viewBox="0 0 300 128" role="img" aria-label="Three sensor features compared with a reference">
+              <path class="graphic-stroke" d="M24 96H276M42 22v74"/>
+              <path class="graphic-teal" d="M65 70h38v26H65zM131 48h38v48h-38zM197 27h38v69h-38z"/>
+              <path class="graphic-stroke" d="M66 61c18-7 27 3 37-1M132 39c15-6 28 1 37-2M198 19c15-6 27 3 37-1"/>
+            </svg>
+            <h3>Score a sensor sample</h3><p>Two compact scorers compare a reading with a generated reference set.</p>
+            <span class="capability-value" id="cap-anomaly-value">Waiting for /metrics…</span>
+            <a class="capability-link" href="/site/lab.html?tool=anomaly">Open the anomaly tool →</a>
+          </article>
+          <article class="capability-card reveal" data-stagger="1">
+            <div class="privacy-sample">
+              <div><span class="eyebrow">BEFORE</span><pre id="cap-privacy-before">Waiting for /tools/minimize…</pre></div>
+              <div><span class="eyebrow">AFTER</span><pre id="cap-privacy-after">Waiting for /tools/minimize…</pre></div>
+            </div>
+            <h3>Trim event metadata</h3><p>The project applies an explicit field allowlist before returning a minimized event.</p>
+            <a class="capability-link" href="/site/lab.html?tool=minimize">Open the privacy tool →</a>
+          </article>
+          <article class="capability-card reveal" data-stagger="2">
+            <svg class="capability-graphic audit-mini" id="cap-audit-chain" viewBox="0 0 360 128" role="img" aria-label="Five linked blocks returned by the temporary audit demo"></svg>
+            <h3>Check a hash chain</h3><p>Each stored block carries the previous block's hash; a changed record fails verification.</p>
+            <span class="capability-value" id="cap-audit-value">Waiting for /tools/audit-chain…</span>
+            <a class="capability-link" href="/site/lab.html?tool=audit-chain">Open the audit tool →</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="camera-section">
+        <div class="camera-copy reveal">
+          <p class="eyebrow">UPLINK EXAMPLE / API VALUES</p>
+          <h2>Weight of a camera</h2>
+          <p>Compare the edge metadata path with a cloud upload of frame bytes. These are fixed example sizes from the local comparison function, not a measurement from a camera.</p>
+          <p class="margin-note">one envelope on the left; a whole truck on the right</p>
+        </div>
+        <div class="camera-scale">
+          <article class="camera-side reveal">
+            <h3>Edge / metadata</h3>
+            <svg viewBox="0 0 300 130" role="img" aria-label="Envelope carrying compact metadata">
+              <path class="graphic-fill camera-envelope" d="M39 28h220v76H39z"/>
+              <path class="graphic-stroke" d="m40 34 109 45L259 34M40 103l78-54M259 103l-78-54"/>
+              <path class="graphic-amber" d="M130 42h40v28h-40z"/>
+              <path class="graphic-stroke" d="M138 51h24M138 59h18"/>
+            </svg>
+            <strong class="camera-amount" id="camera-edge-bytes">—</strong>
+            <p class="margin-note">metadata only</p>
+          </article>
+          <article class="camera-side reveal">
+            <h3>Cloud / frame bytes</h3>
+            <svg viewBox="0 0 300 130" role="img" aria-label="Truck carrying camera frames">
+              <path class="graphic-fill camera-truck" d="M24 28h165v69H24z"/>
+              <path class="graphic-warm" d="M189 53h48l39 34v10h-87z"/>
+              <circle class="graphic-fill" cx="83" cy="102" r="15"/><circle class="graphic-fill" cx="230" cy="102" r="15"/>
+              <path class="graphic-stroke" d="M203 63h25l23 24h-48zM42 47h35M42 60h58"/>
+            </svg>
+            <strong class="camera-amount" id="camera-cloud-bytes">—</strong>
+            <p class="margin-note">full-frame example</p>
+          </article>
+        </div>
+      </section>
+      <p class="serif-caption" id="camera-reduction">Waiting for the comparison endpoint…</p>
+    </div>
+  </main>
+  <footer class="site-footer">Everything here runs on generated data on this machine.</footer>
+</body>
+</html>

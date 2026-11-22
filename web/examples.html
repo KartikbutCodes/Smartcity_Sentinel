@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F4EC">
+  <title>Sentinel | Examples</title>
+  <link rel="stylesheet" href="/site/css/base.css">
+  <link rel="stylesheet" href="/site/css/examples.css">
+  <link rel="stylesheet" href="css/brand.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="/site/js/shared.js" defer></script>
+  <script src="/site/js/examples.js" defer></script>
+</head>
+<body class="examples-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="index.html" aria-label="Smartcity Sentinel home">
+        <svg class="brand-mark" viewBox="-26 -26 52 52" width="34" height="34" aria-hidden="true">
+          <path d="M14 -14 C-6 -20 -18 -6 0 0 C18 6 6 20 -14 14" fill="none" stroke="var(--brand-ink)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="14" cy="-14" r="4.5" fill="var(--brand-amber)"/>
+          <circle cx="-14" cy="14" r="4.5" fill="var(--brand-teal)"/>
+        </svg>
+        <span class="brand-name"><span class="brand-a">smartcity</span><span class="brand-b">sentinel</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/site/">Home</a>
+        <a href="/site/dashboard.html">Dashboard</a>
+        <a href="/site/lab.html">Lab</a>
+        <a href="/site/examples.html" aria-current="page">Examples</a>
+      </nav>
+      <div class="api-state" data-api-state><i class="api-dot" aria-hidden="true"></i><span>CHECKING</span></div>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell examples-shell">
+    <header class="examples-intro">
+      <p class="eyebrow">EXAMPLE RECORDS <span class="simulated-badge">Simulated</span></p>
+      <h1>Data sources and the results</h1>
+      <p class="examples-summary">This page shows what each data source sends in, and what the system produces.</p>
+      <p>These examples are drawn and generated. They are not real footage or real vehicles.</p>
+    </header>
+
+    <section class="problem-grid" aria-labelledby="problem-title">
+      <article>
+        <h2 id="problem-title">The problem</h2>
+        <p>More cameras and sensors watch more places than people can review.</p>
+        <p>Sending all video to a central server is slow and costly.</p>
+        <p>Watching everyone constantly puts privacy at risk.</p>
+        <p>Nobody can easily prove records were not changed.</p>
+      </article>
+      <article>
+        <h2>What this system shows</h2>
+        <p><a href="/site/dashboard.html">Spot unusual readings and rank alerts.</a></p>
+        <p><a href="#traffic-camera">Send short summaries from the camera.</a></p>
+        <p><a href="/site/lab.html">Pick the fastest response route.</a></p>
+        <p><a href="#plate-camera">Protect privacy in a record.</a></p>
+        <p><a href="/site/dashboard.html">Keep a tamper-proof log.</a></p>
+      </article>
+      <p class="problem-note">A simulation on made-up data. It shows how such a system could be designed, not how a real city runs.</p>
+    </section>
+
+    <section class="source-section" id="sensors" aria-labelledby="sensors-title">
+      <header class="source-head">
+        <div><p class="eyebrow">DATA SOURCE 1</p><h2 id="sensors-title">SENSORS</h2></div>
+        <span class="simulated-badge">Simulated</span>
+      </header>
+      <div class="capture-grid">
+        <article><h3>What it captures</h3><p>Six made-up readings over time.</p></article>
+        <article><h3>What the system keeps</h3><p>Values, times, and unusual scores.</p></article>
+      </div>
+      <div class="example-grid">
+        <div class="sensor-charts" id="sensor-charts" aria-label="Sensor line charts"></div>
+        <aside class="latest-card">
+          <h3>Latest reading</h3>
+          <dl id="latest-reading"></dl>
+          <p id="threshold-alerts" aria-live="polite">Loading alert.</p>
+        </aside>
+      </div>
+      <div class="journey-strip" id="sensor-raw-strip" aria-label="Raw reading becomes an alert"></div>
+    </section>
+
+    <section class="source-section" id="traffic-camera" aria-labelledby="traffic-title">
+      <header class="source-head">
+        <div><p class="eyebrow">DATA SOURCE 2</p><h2 id="traffic-title">TRAFFIC CAMERA</h2></div>
+        <span class="simulated-badge">Simulated feed</span>
+      </header>
+      <div class="capture-grid">
+        <article><h3>What it captures</h3><p>A flat street scene with drawn vehicles and people.</p></article>
+        <article><h3>What the system keeps</h3><p>Object labels, counts, crossings, and speeds.</p></article>
+      </div>
+      <div class="camera-layout">
+        <div class="camera-view">
+          <svg id="traffic-scene" viewBox="0 0 720 360" role="img" aria-label="Simulated traffic camera scene">
+            <rect x="0" y="0" width="720" height="360" fill="var(--sky)"/>
+            <rect x="0" y="95" width="720" height="220" fill="#D8D3C7"/>
+            <rect x="0" y="165" width="720" height="5" fill="#FFFFFF"/>
+            <rect x="0" y="240" width="720" height="5" fill="#FFFFFF"/>
+            <line id="count-line" x1="0" y1="180" x2="720" y2="180" stroke="var(--amber)" stroke-width="4" stroke-dasharray="10 8"/>
+            <g id="traffic-objects"></g>
+          </svg>
+          <div class="camera-controls" aria-label="Video controls">
+            <button type="button" id="traffic-play" aria-label="Play simulated feed">Play</button>
+            <label for="traffic-scrub">Frame <input id="traffic-scrub" type="range" min="0" max="149" value="0"></label>
+            <label for="traffic-speed">Speed
+              <select id="traffic-speed"><option value="1">1x</option><option value="2">2x</option></select>
+            </label>
+            <label><input id="traffic-boxes" type="checkbox" checked> Show boxes</label>
+          </div>
+        </div>
+        <aside class="records-log">
+          <h3>What the system records</h3>
+          <p id="traffic-counts">Loading counts.</p>
+          <p id="traffic-crossings">Crossings: loading.</p>
+          <p id="traffic-speeds">Speeds: loading.</p>
+          <p id="traffic-summary">No video kept.</p>
+        </aside>
+      </div>
+      <label class="view-toggle"><input id="camera-view-toggle" type="checkbox" role="switch"> What the system stores</label>
+      <div class="store-card" id="store-card" hidden><strong>No video kept</strong><p id="store-counts"></p><p id="store-speeds"></p></div>
+      <div class="chart-row">
+        <article><h3>Vehicles per 5 seconds</h3><svg id="vehicle-bin-chart" viewBox="0 0 420 160" role="img" aria-label="Vehicle counts per five seconds"></svg></article>
+        <article><h3>Vehicle speeds</h3><svg id="speed-chart" viewBox="0 0 420 160" role="img" aria-label="Vehicle speeds"></svg></article>
+        <article><h3>Weight comparison</h3><p id="weight-saving" class="weight-saving">Loading.</p><p id="weight-detail"></p></article>
+      </div>
+    </section>
+
+    <section class="source-section" id="plate-camera" aria-labelledby="plate-title">
+      <header class="source-head">
+        <div><p class="eyebrow">DATA SOURCE 3</p><h2 id="plate-title">PLATE-READER CAMERA</h2></div>
+        <span class="simulated-badge">Simulated</span>
+      </header>
+      <div class="capture-grid">
+        <article><h3>What it captures</h3><p>Random text and a drawn vehicle front.</p></article>
+        <article><h3>What the system keeps</h3><p>Time, text, confidence, and validity.</p></article>
+      </div>
+      <div class="plate-layout">
+        <svg id="plate-still" viewBox="0 0 520 260" role="img" aria-label="Drawn plate-reader camera view">
+          <rect width="520" height="260" fill="var(--sky)"/>
+          <rect y="160" width="520" height="100" fill="#D8D3C7"/>
+          <rect x="155" y="80" width="210" height="115" rx="18" fill="#9EAAA4" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="205" y="118" width="110" height="38" fill="#FFFFFF" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="216" y="127" width="88" height="20" fill="#F1C94B"/>
+          <rect x="195" y="184" width="18" height="55" fill="var(--ink)"/>
+          <rect x="307" y="184" width="18" height="55" fill="var(--ink)"/>
+          <rect x="190" y="102" width="140" height="72" fill="none" stroke="var(--amber)" stroke-width="5"/>
+        </svg>
+        <div>
+          <h3>Plate reads</h3>
+          <div id="plate-crops" class="plate-crops" aria-label="Twelve drawn plate crops"></div>
+        </div>
+      </div>
+      <div class="plate-table-wrap">
+        <table id="plate-table">
+          <thead><tr><th>Time</th><th>Plate text</th><th>Confidence</th><th>Check</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="chart-row plate-chart-row">
+        <article><h3>Reads per hour</h3><svg id="hour-chart" viewBox="0 0 420 160" role="img" aria-label="Reads per hour"></svg></article>
+        <article class="privacy-card">
+          <h3>Before and after</h3>
+          <label for="read-select">Choose a read</label>
+          <select id="read-select"></select>
+          <pre id="before-record"></pre>
+          <pre id="after-record"></pre>
+          <p id="privacy-change"></p>
+          <p><strong>This is the part privacy rules care about most.</strong></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="journey-section" id="journey" aria-labelledby="journey-title">
+      <h2 id="journey-title">One record's journey</h2>
+      <div class="record-journey" id="record-journey">
+        <article data-step><strong>Camera</strong><p id="journey-camera">Loading.</p></article>
+        <article data-step><strong>Summary</strong><p id="journey-summary">Loading.</p></article>
+        <article data-step><strong>Checks</strong><p id="journey-check">Loading.</p></article>
+        <article data-step><strong>Privacy step</strong><p id="journey-privacy">Loading.</p></article>
+        <article data-step><strong>Alert</strong><p id="journey-alert">Loading.</p></article>
+        <article data-step><strong>Dashboard</strong><p id="journey-dashboard">Loading.</p></article>
+      </div>
+    </section>
+
+    <section class="what-box" aria-labelledby="what-title">
+      <h2 id="what-title">What this can't show</h2>
+      <ul>
+        <li>It is not real footage or a real vehicle.</li>
+        <li>The plate reader does not run real text recognition here. Reads are simulated.</li>
+        <li>Speeds depend on a made-up scale.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="site-footer">Everything here runs on generated data on this machine.</footer>
+</body>
+</html>
